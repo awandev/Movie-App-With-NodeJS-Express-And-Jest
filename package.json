@@ -1,0 +1,28 @@
+{
+  "name": "movie",
+  "version": "1.0.0",
+  "description": "Movie App With NodeJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awandev/Movie-App-With-NodeJS-Express-And-Jest.git"
+  },
+  "keywords": [
+    "movie",
+    "nodejs",
+    "express",
+    "jest"
+  ],
+  "author": "awandev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/awandev/Movie-App-With-NodeJS-Express-And-Jest/issues"
+  },
+  "homepage": "https://github.com/awandev/Movie-App-With-NodeJS-Express-And-Jest#readme",
+  "dependencies": {
+    "casual": "^1.6.2"
+  }
+}
