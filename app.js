@@ -1,10 +1,18 @@
-const http = require('http')
-const casual = require('casual')
+const express = require('express')
+const app = express();
 
-const server = http.createServer((req, res) => {
-    res.end(casual.sentence);
+app.get('/', (req, res) => {
+    res.send('<a href="/contact">Contact Us</a><br /><a href="/about">About Us</a>')
 });
 
-server.listen(4000, () => {
-    console.log('Server started at port 4000')
+app.get('/contact', (req, res) => {
+    res.send('<h1>Contact Us Page</h1>')
 });
+
+app.get('/about', (req, res) => {
+    res.send('<h1>About Us Page</h1>')
+})
+
+app.listen(3000, () => {
+    console.log('Server started on port 3000')
+})
