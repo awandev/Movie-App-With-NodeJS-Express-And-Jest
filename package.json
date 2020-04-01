@@ -24,6 +24,9 @@
   "homepage": "https://github.com/awandev/Movie-App-With-NodeJS-Express-And-Jest#readme",
   "dependencies": {
     "casual": "^1.6.2",
-    "express": "^4.17.1"
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7"
   }
 }
