@@ -1,5 +1,5 @@
 {
-  "name": "movie",
+  "name": "App from udemy",
   "version": "1.0.0",
   "description": "Movie App With NodeJS",
   "main": "app.js",
@@ -24,8 +24,10 @@
   "homepage": "https://github.com/awandev/Movie-App-With-NodeJS-Express-And-Jest#readme",
   "dependencies": {
     "casual": "^1.6.2",
+    "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "mongoose": "^5.9.7",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "request": "^2.88.2"
