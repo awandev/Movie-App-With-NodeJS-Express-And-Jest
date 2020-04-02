@@ -10,8 +10,6 @@ const bodyParser = require('body-parser')
 // router
 const emproyeeRoutes = require('./routes/employees.route')
 
-
-
 dotenv.config({path: './config.env'})
 
 mongoose.connect(process.env.DATABASE_LOCAL, {
