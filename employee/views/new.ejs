@@ -1,0 +1,16 @@
+<%- include('partials/header') -%>
+
+<div class="container mt-5 w50">
+    <h2 class="mb-4">Add New Employee</h2>
+    <form action="/employee/new" method="POST">
+        <input type="text" name="name" id="" placeholder="Employee Name" class="form-control">
+        <br />
+        <input type="text" name="designation" id="" placeholder="Designation" class="form-control">
+        <br />
+        <input type="text" name="salary" id="" placeholder="Salary" class="form-control">
+        <br />
+        <button type="submit" class="btn btn-danger btn-block mt-3">Add to Database</button>
+    </form>
+</div>
+
+<%- include('partials/footer') -%>
