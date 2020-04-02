@@ -13,10 +13,33 @@ router.get('/', (req, res) => {
         })
 })
 
+
+
+// get router start here
 router.get('/employee/new', (req, res) => {
     res.render('new');
 })
 
+router.get('/employee/search', (req,res) => {
+    res.render('search',{employee:""});
+})
+
+router.get('/employee', (req, res) => {
+    console.log('search result')
+    let searchQuery = {name : req.query.name};
+    Employee.findOne(searchQuery)
+        .then(employee => {
+            res.render('search', {employee : employee});
+        })
+        .catch(err => {
+            console.log(err);
+        })
+})
+
+// get router end here
+
+
+// POST router starts here
 router.post('/employee/new', (req, res) => {
     let newEmployee = {
         name : req.body.name,
