@@ -89,6 +89,30 @@ app.post('/uploadSingle', upload.single('singleImage'), (req, res, next) => {
 
 });
 
+
+app.post('/uploadmultiple', upload.array('multipleImages'), (req, res, next) => {
+    const files = req.files;
+    if(!files) {
+        return console.log('Please select images')
+    }
+
+    files.forEach(file => {
+        let url = file.path.replace('public', '');
+        Picture.findOne({imgUrl: url})
+            .then(async img => {
+                if(img) {
+                    return console.log('Duplicate Image')
+                }
+                await Picture.create({imgUrl : url});
+            })
+            .catch(err => {
+                return console.log('Error: ' + err);
+            })
+    })
+
+    res.redirect('/');
+})
+
 app.listen(3000, () => {
     console.log('server is started')
 })
