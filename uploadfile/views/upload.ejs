@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <title>File Uploads</title>
 </head>
+ 
 <body>
-    
+
+
     <div class="container w-50">
         <h1 class="text-center my-4">Upload Images Here</h1>
-        <!-- Single File -->
+        <!--  SINGLE FILE -->
         <h3 class="mt-5 mb-2">Single Upload</h3>
         <div class="custom-file">
-            <form action="/uploadSingle" method="post" class="form-control" enctype="multipart/form-data">
-                <input type="file" name="singleImage" id="" class="custom-file-input">
-                <label for="customFile" class="custom-file-label">Choose Image</label>
-                <input type="submit" value="Upload Image" class="btn btn-success btn-block my-2">
+            <form class="form-control" action="/uploadSingle" enctype="multipart/form-data" method="POST">
+                <input name="singleImage" type="file" class="custom-file-input"">
+                <label class=" custom-file-label" for="customFile">Choose Image</label>
+                <input class="btn btn-success btn-block my-2" type="submit" value="Upload Image" />
             </form>
         </div>
 
+        <!--  MULTIPLE FILE -->
         <h3 class="mt-5 mb-2">Multiple Uploads</h3>
-        <div class="custom file">
-            <form action="/uploadmultiple" enctype="multipart/form-data" method="POST" class="form-control">
-            <input type="file" name="multipleimages" id="" class="custom-file-input" multiple>
-            <label for="customFile" class="custom-file-label">Choose Image</label>
-            <input type="submit" value="Upload Multiple">.btn.btn-danger.btn-block.my-2
+        <div class="custom-file">
+            <form class="form-control" action="/uploadmultiple" enctype="multipart/form-data" method="POST">
+                <input name="multipleImages" type="file" class="custom-file-input"" multiple>
+                <label class=" custom-file-label" for="customFile">Choose Image</label>
+                <input class="btn btn-danger btn-block my-2" type="submit" value="Upload Multiple Images" />
             </form>
         </div>
-    </div>
 
-</body>
+     </div>  
+  </body>
 </html>

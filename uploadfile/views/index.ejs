@@ -10,13 +10,16 @@
     <h1 class="text-center my-3">All Images</h1>
     <div class="container 2-75">
         <div class="row">
+            <% images.forEach(img => { %>
                 <div class="col-4">
-                    <img src="" alt="" style="border:3px solid grey" height="250" width="250" class="mx-4 my-3 p1">
-                    <form action="/delete/" style="display: inline;" method="POST">
+                    <img src="<%= img.imgUrl %>" alt="" style="border:3px solid grey" height="250" width="250" class="mx-4 my-3 p1">
+                    <form action="/delete/<%= img.id %>?_method=DELETE" style="display: inline;" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger float-none mx-4 px-5">Delete !</button>
                     </form>
                 </div>
+            <% }) %>
+                
         </div>
     </div>
 </body>
