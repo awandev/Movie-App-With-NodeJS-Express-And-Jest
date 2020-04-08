@@ -8,6 +8,10 @@ const mongoose = require('mongoose')
 const flash = require('connect-flash')
 const session = require('express-session')
 
+// require user router
+const userRoutes = require('./routes/users')
+
+
 dotenv.config({
     path: './config.env'
 })
@@ -35,3 +39,14 @@ app.use((req, res, next) => {
     next();
 });
 app.use(bodyParser.urlencoded({extended: true}));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
+// set routes
+app.use(userRoutes)
+
+
+app.listen(process.env.PORT, () => {
+    console.log('Server Berjalan')
+})
