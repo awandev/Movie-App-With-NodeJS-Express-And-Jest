@@ -4,7 +4,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const multer = require('multer')
 const methodOverride = require('method-override')
-
+const fs = require('fs')
 
 
 mongoose.connect("mongodb://localhost:27017/images", {
@@ -111,6 +111,24 @@ app.post('/uploadmultiple', upload.array('multipleImages'), (req, res, next) => 
     })
 
     res.redirect('/');
+})
+
+
+app.delete('/delete/:id', (req, res) => {
+    let searchQuery = {_id : req.params.id};
+    Picture.findOne(searchQuery)
+        .then(img => {
+            fs.unlink(__dirname+'/public/'+img.imgUrl, (err)=>{
+                if(err) return console.log(err);
+                Picture.deleteOne(searchQuery)
+                    .then(img => {
+                        console.log('delete success')
+                        res.redirect('/');
+                    })
+            })
+        }).catch(err => {
+            console.log(err);
+        });
 })
 
 app.listen(3000, () => {
