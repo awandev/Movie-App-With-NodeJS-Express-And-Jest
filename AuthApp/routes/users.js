@@ -56,9 +56,14 @@ router.get('/reset/:token', (req, res)=> {
         });
 });
 
-router.get('/password/change', isAuthenticatedUser, (req, res)=> {
-    res.render('changepassword');
-});
+
+
+router.get('/password/change', (req, res) => {
+    res.render('changepassword')
+})
+
+
+
 
 //POST routes
 router.post('/login', passport.authenticate('local', {
