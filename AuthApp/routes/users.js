@@ -38,6 +38,25 @@ router.get('/logout', (req, res) => {
 
 router.get('/forgot', (req, res) => {
     res.render('forgot');
+});
+
+router.get('/reset/:token', (req, res) => {
+    User.findOne({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: {
+            $gt : Date.now()
+        }})
+        .then(user => {
+            if(!user) {
+                req.flash('error_msg', 'Password reset token in invalid or has been expired')
+                res.redirect('/forgot')
+            }
+            res.render('newpassword', {token : req.params.token})
+        })
+        .catch(err => {
+            req.flash('error_msg', 'ERROR: '+err);
+            res.redirect('/forgot');
+        });
 })
 
 
