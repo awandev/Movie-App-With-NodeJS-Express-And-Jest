@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
+const crypto = require('crypto')
+const async = require('async')
+const nodemailer = require('nodemailer')
+
 
 const User = require('../models/usermodel')
 
@@ -32,6 +36,10 @@ router.get('/logout', (req, res) => {
 
 })
 
+router.get('/forgot', (req, res) => {
+    res.render('forgot');
+})
+
 
 //POST routes
 router.post('/login', passport.authenticate('local', {
@@ -59,6 +67,63 @@ router.post('/signup', (req, res) => {
             res.redirect('/login');
         })
     })
-    
 })
+
+// router to handle forgot password
+router.post('/forgot', (req, res, next) => {
+    let recoveryPassword = '';
+    async.waterfall([
+        (done) => {
+            crypto.randomBytes(30, (err, buf) => {
+                let token = buf.toString('hex');
+                done(err, token);
+            })
+        },
+        (token, done) => {
+            User.findOne({email: req.body.email})
+                .then(user => {
+                    if(!user) {
+                        req.flash('error_msg', 'User does not exist with this email')
+                        return res.redirect('/forgot')
+                    }
+
+                    user.resetPasswordToken = token;
+                    user.resetPasswordExpires = Date.now() + 1800000
+
+                    user.save(err => {
+                        done(err, token, user);
+                    });
+                })
+                .catch(err => {
+                    req.flash('error_msg', 'Error : ' + err);
+                    res.redirect('/forgot');
+                })
+        }, 
+        (token, user) => {
+            let smtpTransport = nodemailer.createTransport({
+                service : 'Gmail',
+                auth : {
+                    user : process.env.GMAIL_EMAIL,
+                    pass : process.env.GMAIL_PASSWORD
+                }
+            });
+
+            let mailOptions = {
+                to : user.email,
+                from : 'Awandev from awandev.com',
+                subject : 'Recovery Email from Auth Project',
+                text : 'Please click the following link to recover your password: \n\n' + 'http://' + req.headers.host + '/reset/'+token+'\n\n' + 'If you did not request this, please ignore this email.'
+            };
+            smtpTransport.sendMail(mailOptions, err=> {
+                req.flash('success_msg', 'Email send with further instructions. Please check that.')
+                res.redirect('/forgot')
+
+            })
+        }
+    ], err => {
+        if(err) res.redirect('/forgot')
+    })
+})
+
+
 module.exports = router;
