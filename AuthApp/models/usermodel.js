@@ -9,7 +9,9 @@ let userScheme = new mongoose.Schema({
     password : {
         type : String,
         select : false
-    }
+    },
+    resetPasswordToken : String,
+    resetPasswordExpires : Date
 });
 
 userScheme.plugin(passportLocalMongoose, {usernameField: 'email'});
