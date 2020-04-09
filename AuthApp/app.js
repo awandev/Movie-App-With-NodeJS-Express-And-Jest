@@ -17,7 +17,7 @@ const userRoutes = require('./routes/users')
 const User = require('./models/usermodel')
 
 dotenv.config({
-    path: './config.env'
+    path: '../conf.env'
 })
 
 mongoose.connect(process.env.DATABASE_LOCAL, {
