@@ -16,18 +16,27 @@ async function scrapeData(url, page) {
         const html = await page.evaluate(() => document.body.innerHTML);
         const $ = cheerio.load(html);
 
-        
+        let title = $("h2").text();
+        let releaseDate = $(".release_date").text();
+        let overview = $(".overview > p").text();
+        let userScore = $(".user_score_chart").attr("data-percent");
+        let imgUrl = $("#original_header > div.poster_wrapper.false > div > div.image_content.backdrop > img").attr("src")
+
+        browser.close();
+
         return {
-            
+            title,
+            releaseDate,
+            overview,
+            userScore,
+            imgUrl
         }
     } catch (error) {
         console.log(error)
     }
 }
 
-async function getResults() {
-   
-}
+
 
 app.get('/results', async(req, res) => {
     let url = req.query.search;
@@ -40,8 +49,7 @@ app.get('/results', async(req, res) => {
     const page = await browser.newPage();
 
     let data = await scrapeData(url, page);
-    
-    browser.close()
+    res.render('results', {data:data})
 })
 
 app.get('/search', (req,res) => {
