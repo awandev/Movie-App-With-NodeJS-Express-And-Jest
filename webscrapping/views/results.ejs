@@ -28,6 +28,9 @@
                     <hr>
                     <h4 class="mb-3">Featured Crew:</h4>
 
+                    <% data["crew"].foreach((crew) => { %>
+                        <p class="ml-2"><b><%= crew.name %></b> (<%=crew.role%>)</p>
+                    <% }); %>
                       
                 </div>
             </div>
