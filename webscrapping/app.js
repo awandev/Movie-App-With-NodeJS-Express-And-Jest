@@ -20,15 +20,16 @@ async function scrapeData(url, page) {
         let releaseDate = $(".release_date").text();
         let overview = $(".overview > p").text();
         let userScore = $(".user_score_chart").attr("data-percent");
-        let imgUrl = $("#original_header > div.poster_wrapper.false > div > div.image_content.backdrop > img").attr("src")
+        let imgUrl = $("#original_header > div.poster_wrapper.true > div.poster > div.image_content.backdrop > img").attr("src")
+
 
         
  
         let crewLength = $("#original_header > div.header_poster_wrapper.true > section > div.header_info > ol > li").length;
 
         let crew = []
-        for(let i=1; i<crewLength; i++) {
-            let name = $("#original_header > div.header_poster_wrapper.true > section > div.header_info > ol > li:nth-child("+i+") > p:nth-child("+i+") > a").text()
+        for(let i=1; i<=crewLength; i++) {
+            let name = $("#original_header > div.header_poster_wrapper.true > section > div.header_info > ol > li:nth-child("+i+") > p:nth-child(1) > a").text()
 
             let role = $("#original_header > div.header_poster_wrapper.true > section > div.header_info > ol > li:nth-child("+i+") > p.character").text()
 
@@ -45,7 +46,8 @@ async function scrapeData(url, page) {
             releaseDate,
             overview,
             userScore,
-            imgUrl
+            imgUrl,
+            crew
         }
     } catch (error) {
         console.log(error)
